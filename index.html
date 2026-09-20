@@ -1,0 +1,1589 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>밥장학사 식대장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#f4f6f3;
+    --surface:#ffffff;
+    --surface-2:#eef1ec;
+    --border:#dde2db;
+    --text:#20261f;
+    --text-muted:#69735f;
+    --accent:#3c6e58;
+    --accent-ink:#f2f8f4;
+    --accent-soft:#e2eee6;
+    --weekend:#8a5a4a;
+    --weekend-soft:#f7ece7;
+    --owe:#b5502f;
+    --owe-soft:#fbeae3;
+    --refund:#2f7d6b;
+    --refund-soft:#e3f2ec;
+    --shadow:0 8px 24px -12px rgba(32,38,31,0.25);
+    --radius:14px;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1a1d19;
+      --surface:#232720;
+      --surface-2:#2b3027;
+      --border:#3a4038;
+      --text:#e9ede6;
+      --text-muted:#a2ab98;
+      --accent:#6fae94;
+      --accent-ink:#12241c;
+      --accent-soft:#28352d;
+      --weekend:#d99a83;
+      --weekend-soft:#332621;
+      --owe:#e08a68;
+      --owe-soft:#3a291f;
+      --refund:#7fc4ac;
+      --refund-soft:#1f342c;
+      --shadow:0 8px 28px -12px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1a1d19;
+    --surface:#232720;
+    --surface-2:#2b3027;
+    --border:#3a4038;
+    --text:#e9ede6;
+    --text-muted:#a2ab98;
+    --accent:#6fae94;
+    --accent-ink:#12241c;
+    --accent-soft:#28352d;
+    --weekend:#d99a83;
+    --weekend-soft:#332621;
+    --owe:#e08a68;
+    --owe-soft:#3a291f;
+    --refund:#7fc4ac;
+    --refund-soft:#1f342c;
+    --shadow:0 8px 28px -12px rgba(0,0,0,0.55);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size:14px;
+    line-height:1.5;
+    padding-inline:16px;
+    padding-block:20px 48px;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+  h1,h2,h3{font-family:"Gowun Batang", "Noto Sans KR", serif;text-wrap:balance;margin:0;}
+  .app-header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:18px;}
+  .app-header h1{font-size:26px;color:var(--accent);}
+  .app-header .sub{color:var(--text-muted);font-size:13px;}
+  .toolbar{
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:12px 14px;margin-bottom:18px;box-shadow:var(--shadow);
+  }
+  .toolbar .nav-group{display:flex;align-items:center;gap:6px;}
+  .regen-group{display:flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:4px 6px;}
+  .regen-group input[type="date"]{padding:6px 8px;}
+  .regen-group span{font-size:12px;color:var(--text-muted);white-space:nowrap;}
+  select, button, input{
+    font-family:inherit;font-size:14px;color:var(--text);
+    background:var(--surface-2);border:1px solid var(--border);border-radius:9px;
+    padding:8px 10px;
+  }
+  button{cursor:pointer;transition:background .15s, transform .05s;}
+  button:hover{background:var(--accent-soft);}
+  button:active{transform:translateY(1px);}
+  button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600;}
+  button.primary:hover{filter:brightness(1.05);}
+  button.ghost{background:transparent;}
+  button.icon{padding:8px 12px;font-size:16px;line-height:1;}
+  .spacer{flex:1;}
+  .today-mark{font-size:12px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 9px;}
+
+  .calendar{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:14px;box-shadow:var(--shadow);margin-bottom:22px;
+  }
+  .dow-row{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px;}
+  .dow-row div{text-align:center;font-size:12px;color:var(--text-muted);font-weight:600;padding:4px 0;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .cell{
+    appearance:none;-webkit-appearance:none;font:inherit;margin:0;
+    min-height:88px;border:1px solid var(--border);border-radius:10px;background:var(--surface);
+    padding:6px 7px;display:flex;flex-direction:column;gap:4px;cursor:pointer;text-align:left;
+    color:var(--text);position:relative;overflow:hidden;
+  }
+  .cell:hover{border-color:var(--accent);}
+  .cell:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+  .cell.blank{background:transparent;border:1px dashed transparent;cursor:default;}
+  .cell .dnum{font-weight:600;font-variant-numeric:tabular-nums;}
+  .cell.weekend .dnum{color:var(--weekend);}
+  .cell.today{outline:2px solid var(--accent);outline-offset:-2px;}
+  .cell .meal-name{font-size:12px;font-weight:600;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .cell .meal-menu{font-size:11px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .cell .meal-amt{margin-top:auto;font-size:11px;font-variant-numeric:tabular-nums;color:var(--text-muted);}
+  .cell .badge{position:absolute;top:6px;right:6px;font-size:10px;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 6px;}
+
+  .section-title{display:flex;align-items:center;gap:10px;margin:26px 0 10px;}
+  .section-title h2{font-size:18px;}
+  .section-title .hint{font-size:12px;color:var(--text-muted);}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);}
+  table{border-collapse:collapse;width:100%;min-width:820px;font-variant-numeric:tabular-nums;}
+  th,td{border-bottom:1px solid var(--border);padding:6px 8px;text-align:center;font-size:12.5px;white-space:nowrap;}
+  thead th{position:sticky;top:0;background:var(--surface-2);z-index:1;font-size:12px;color:var(--text-muted);}
+  tbody tr:hover{background:var(--surface-2);}
+  td.left{text-align:left;}
+  td.dim{color:var(--text-muted);}
+  tr.weekend-row td{background:var(--weekend-soft);}
+  tr.total-row td{font-weight:700;background:var(--surface-2);border-top:2px solid var(--border);}
+  tr.settle-row td{font-weight:700;}
+  .amt-owe{color:var(--owe);}
+  .amt-refund{color:var(--refund);}
+
+  .overlay{
+    position:fixed;inset:0;background:rgba(20,24,18,0.45);display:flex;align-items:center;justify-content:center;
+    padding:20px;z-index:50;
+  }
+  .overlay[hidden]{display:none;}
+  .modal{
+    background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);
+    width:100%;max-width:520px;max-height:88vh;overflow-y:auto;padding:20px;border:1px solid var(--border);
+  }
+  .modal.wide{max-width:760px;}
+  .modal.modal-wide-day{max-width:600px;}
+  .modal h3{font-size:18px;margin-bottom:14px;color:var(--accent);}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px;font-weight:600;}
+  .field input, .field select{width:100%;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .attendee-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;margin-top:4px;}
+  .attendee-grid label{
+    display:flex;align-items:center;gap:5px;font-size:12.5px;border:1px solid var(--border);
+    border-radius:8px;padding:6px 8px;cursor:pointer;background:var(--surface-2);
+  }
+  .attendee-grid label.checked{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600;}
+  .attendee-grid.compact label{padding:4px 6px;font-size:11.5px;}
+  .share-line{display:flex;justify-content:space-between;background:var(--accent-soft);border-radius:9px;padding:9px 12px;font-weight:600;color:var(--accent);margin:12px 0;}
+  .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+  .modal-actions .danger{color:var(--owe);border-color:var(--owe);}
+  .item-card{border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--surface-2);position:relative;}
+  .item-card .item-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .item-card .item-head span{font-size:12px;font-weight:700;color:var(--text-muted);}
+  .item-card .item-remove{padding:3px 9px;font-size:11px;color:var(--owe);border-color:var(--owe);background:transparent;}
+  .day-total-line{display:flex;justify-content:space-between;background:var(--surface-2);border:1px dashed var(--border);border-radius:9px;padding:9px 12px;font-weight:600;margin:10px 0 4px;}
+  #addItemBtn{width:100%;margin-bottom:4px;}
+
+  .mgmt-tabs{display:flex;gap:6px;margin-bottom:14px;}
+  .mgmt-tabs button.active{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
+  .mgmt-list{display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow-y:auto;}
+  .mgmt-row{display:grid;grid-template-columns:1.1fr 1.6fr 0.9fr auto;gap:6px;align-items:center;}
+  .mgmt-row input{font-size:12.5px;padding:6px 8px;}
+  .mgmt-row button{padding:4px 8px;font-size:12px;}
+  .roster-row{display:flex;gap:6px;align-items:center;}
+
+  .note{font-size:12px;color:var(--text-muted);background:var(--surface-2);border-radius:9px;padding:9px 12px;margin:10px 0;}
+  footer{margin-top:30px;font-size:12px;color:var(--text-muted);text-align:center;}
+  @media (max-width:640px){
+    .cell{min-height:64px;font-size:11px;}
+    .mgmt-row{grid-template-columns:1fr;}
+    table{min-width:1000px;}
+  }
+
+  /* ---- edit lock ---- */
+  .header-right{display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
+  .header-right button{padding:6px 12px;font-size:13px;}
+  .lock-pill{font-size:12px;border-radius:999px;padding:3px 10px;border:1px solid var(--border);background:var(--surface-2);color:var(--text-muted);font-weight:600;white-space:nowrap;}
+  .lock-pill.open{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+  body.is-locked .needs-unlock::before{content:"🔒 ";}
+  .modal.narrow{max-width:400px;}
+  .auth-desc{font-size:12.5px;color:var(--text-muted);margin:-6px 0 14px;line-height:1.55;}
+  .auth-error{color:var(--owe);font-size:12.5px;min-height:18px;margin-top:2px;}
+  .item-card.readonly input:disabled, .item-card.readonly select:disabled{
+    opacity:1;color:var(--text);-webkit-text-fill-color:var(--text);cursor:default;background:var(--surface);
+  }
+  .item-card.readonly .attendee-grid label{cursor:default;}
+  .paid-input{width:88px;padding:4px 6px;font-size:12px;text-align:right;font-variant-numeric:tabular-nums;}
+  .paid-input::placeholder{color:var(--text-muted);opacity:.75;}
+  .paid-cell.override .paid-input{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  td.override-val{color:var(--accent);font-weight:600;}
+</style>
+
+<div class="wrap">
+  <div class="app-header">
+    <div>
+      <h1>밥장학사 식대장</h1>
+      <div class="sub">날짜별 식당 배정 · 참석자 분담 계산 · 월별 정산표</div>
+    </div>
+    <div class="header-right">
+      <span class="sub" id="storageBadge"></span>
+      <span class="lock-pill" id="lockPill">보기 전용</span>
+      <button id="changePwBtn" class="ghost" hidden>비밀번호 변경</button>
+      <button id="lockBtn">🔒 잠금 해제</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="nav-group">
+      <button class="icon ghost" id="prevMonth" aria-label="이전 달">‹</button>
+      <select id="yearSel"></select>
+      <select id="monthSel"></select>
+      <button class="icon ghost" id="nextMonth" aria-label="다음 달">›</button>
+    </div>
+    <button id="todayBtn">오늘</button>
+    <div class="spacer"></div>
+    <div class="regen-group">
+      <span>이 날짜부터</span>
+      <input type="date" id="regenFromDate">
+      <button id="regenFromBtn" class="needs-unlock">이후만 재생성</button>
+    </div>
+    <button id="genMonthBtn" class="primary needs-unlock">이 달 메뉴 자동 생성</button>
+    <button id="exportExcelBtn">엑셀로 내보내기</button>
+    <button id="settingsBtn" class="needs-unlock">식당·명단 관리</button>
+  </div>
+
+  <div class="calendar">
+    <div class="dow-row" id="dowRow"></div>
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+
+  <div class="section-title">
+    <h2 id="settleTitle">월별 정산표</h2>
+    <span class="hint">한 사람이 결제하고 참석자끼리 1/n로 나눈 뒤, 실제 결제액과 부담액 차이를 정산합니다 · 실제 결제액은 수정 가능 상태에서 직접 입력할 수 있습니다</span>
+  </div>
+  <div class="table-wrap">
+    <table id="settleTable"></table>
+  </div>
+  <div class="note" id="paidNote" hidden>‘실제 결제액’ 칸에 금액을 직접 입력하면 자동 계산값 대신 그 금액으로 정산액이 계산됩니다. 칸을 비우면 다시 자동 계산값(회색 숫자)으로 돌아갑니다. 입력은 이 달·해당 사람에게만 적용됩니다.</div>
+
+  <footer>충남외고 밥장학사 식대 관리 도구 · 누구나 볼 수 있고, 수정은 비밀번호로 잠겨 있습니다</footer>
+</div>
+
+<!-- Day editor modal -->
+<div class="overlay" id="dayOverlay" hidden>
+  <div class="modal modal-wide-day" id="dayModal">
+    <h3 id="dayModalTitle">날짜 편집</h3>
+    <datalist id="restList"></datalist>
+    <div id="itemsContainer"></div>
+    <button class="ghost" id="addItemBtn">+ 결제 항목 추가</button>
+    <div class="day-total-line" id="dayTotalLine">
+      <span id="dayTotalCount">0건</span>
+      <span id="dayTotalAmt">합계 0원</span>
+    </div>
+    <div class="modal-actions">
+      <button class="ghost danger" id="deleteDayBtn">이 날짜 전체 삭제</button>
+      <div class="spacer"></div>
+      <button class="ghost" id="cancelDayBtn">닫기</button>
+      <button class="primary" id="unlockDayBtn" hidden>🔒 수정하려면 잠금 해제</button>
+      <button class="primary" id="saveDayBtn">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings modal -->
+<div class="overlay" id="settingsOverlay" hidden>
+  <div class="modal wide">
+    <h3>식당·명단 관리</h3>
+    <div class="mgmt-tabs">
+      <button id="tabRestBtn" class="active">식당 목록</button>
+      <button id="tabRosterBtn">참여자 명단</button>
+    </div>
+
+    <div id="mgmtRest">
+      <div class="note">식당명·메뉴·분류를 수정하거나 새 식당을 추가할 수 있습니다. 분류는 자동 메뉴 생성 시 다양성을 맞추는 데 쓰입니다.</div>
+      <div class="mgmt-row" style="font-weight:600;color:var(--text-muted);font-size:11px;">
+        <span>상호명</span><span>주메뉴</span><span>분류</span><span></span>
+      </div>
+      <div class="mgmt-list" id="restMgmtList"></div>
+      <div class="modal-actions">
+        <button id="addRestRow">+ 식당 추가</button>
+        <div class="spacer"></div>
+        <button class="primary" id="saveRestBtn">저장</button>
+      </div>
+    </div>
+
+    <div id="mgmtRoster" hidden>
+      <div class="note">밥장학사에 참여하는 인원 명단입니다. 이름을 바꾸면 이후 날짜부터 적용됩니다.</div>
+      <div class="mgmt-list" id="rosterMgmtList"></div>
+      <div class="modal-actions">
+        <button id="addRosterRow">+ 인원 추가</button>
+        <div class="spacer"></div>
+        <button class="primary" id="saveRosterBtn">저장</button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="ghost" id="closeSettingsBtn">닫기</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<!-- Password modal (kept after the other modals so it always stacks on top) -->
+<div class="overlay" id="authOverlay" hidden>
+  <div class="modal narrow">
+    <h3 id="authTitle">비밀번호</h3>
+    <div class="auth-desc" id="authDesc"></div>
+    <div class="field" id="authCurField"><label for="authCur">현재 비밀번호</label><input type="password" id="authCur" autocomplete="off"></div>
+    <div class="field" id="authNewField"><label for="authNew">새 비밀번호 (4자 이상)</label><input type="password" id="authNew" autocomplete="new-password"></div>
+    <div class="field" id="authNew2Field"><label for="authNew2">새 비밀번호 확인</label><input type="password" id="authNew2" autocomplete="new-password"></div>
+    <div class="auth-error" id="authError" role="alert"></div>
+    <div class="modal-actions">
+      <button class="ghost" id="authCancelBtn">취소</button>
+      <button class="primary" id="authOkBtn">확인</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- Default data ----------
+  var DEFAULT_ROSTER = ["교육장","교육과장","권유석","박은주","윤도영","윤성인","김혜정","박윤희","이은혜","박상호","이경희"];
+
+  var DEFAULT_RESTAURANTS = [
+    ["153포인츠부대찌게","부대찌개","찌개",""],
+    ["고향기사식당","제육,오삼불고기,오징어볶음(찌개),김치찌개","고기",""],
+    ["김영희동태탕","동태탕","탕",""],
+    ["꼬마김밥","꼬마김밥","분식",""],
+    ["남다른집","코다리찜","찜",""],
+    ["남양식당","돈까스,생선까스,비후까스","돈까스/양식",""],
+    ["내포블쭈꾸미","쭈꾸미","해물",""],
+    ["다구언갈비","갈비탕,육회비빔밥","탕/고기",""],
+    ["대흥식당떡","어죽","죽/탕",""],
+    ["마중","생선구이,굴밥","생선/해물",""],
+    ["맨밥","한식뷔페","뷔페",""],
+    ["메밀꽃","메밀수제비,막국수","국수","월요일 휴무"],
+    ["무모한초밥","알뜰초밥,알밥,회덮밥,우동,육회덮밥","일식/초밥",""],
+    ["무진장","김치찜,뱅어이찌개,닭백숙","찜/백숙",""],
+    ["밀터","칼국수","국수",""],
+    ["박정자가든","우렁쌈밥","쌈밥",""],
+    ["본도시락","불고기도시락,부추제육","도시락/고기",""],
+    ["보릿골","보리밥,두부김치,파전,비지찌개","보리밥/한식",""],
+    ["봉나무두릎지삼계탕","백숙,삼계탕,삼계장국","백숙/삼계탕",""],
+    ["산수미","생갈비김치찌개,막국수","찌개/국수",""],
+    ["상다리갈국수","칼국수,콩국수,냉국수,만두","국수",""],
+    ["서가네부대찌개","부대찌개","찌개",""],
+    ["소반","순두부","찌개/한식",""],
+    ["스시마당","회덮밥,우동세트","일식/초밥",""],
+    ["양평해장국","양평해장,선지해장,고기국밥","국밥",""],
+    ["예가","예가정식","한정식",""],
+    ["예당분식","손칼국수,잔치국수,비빔국수,콩국수","국수",""],
+    ["예산냉면갈비","우렁쌈밥,육쌈냉면","냉면/쌈밥",""],
+    ["오복시당","검은콩국수,메밀콩국수,비빔국수,춘천막국수","국수",""],
+    ["외갓집소머리국밥","소머리국밥","국밥",""],
+    ["윤가네칼국수","칼국수","국수",""],
+    ["장터국밥","김치찌개,계란찌개","찌개",""],
+    ["정종간","시래기찜밥,굴솥밥","솥밥",""],
+    ["제주갈치","고등어조림,갈치조림","생선조림",""],
+    ["작한아구찜","해물칼국수,석화","해물",""],
+    ["천지","간짜장,잡채밥","중식",""],
+    ["청년들아름담은","도시락","도시락",""],
+    ["최고창","콩나물굴국수","국수",""],
+    ["춘천닭갈비","닭갈비","고기(닭)",""],
+    ["토방","보리밥,청국장,순두부,파전","한식",""],
+    ["페이보리스원","직화쭈꾸미세트","해물",""],
+    ["하누한우","백반","백반",""],
+    ["한촌설렁탕","설렁탕,도가니탕","국밥/탕",""],
+    ["햇살촌(신암)","시래기갈치조림,묵은지등갈비찜","찜/조림",""],
+    ["천사나라","마늘닭","고기(닭)",""],
+    ["홍도식당","병어조림,우렁쌈밥","조림/쌈밥",""],
+    ["홍익육개장","육개장","탕",""],
+    ["황금시대","묵은지돼지갈비,동태찌개","고기/찌개",""],
+    ["쭈미네","점심특선,쭈꾸미오리진","해물",""],
+    ["한오번여추어탕","추어탕","탕",""],
+    ["노브랜드","콩솥밥,비빔밥,국수","솥밥/비빔밥",""],
+    ["신충식당","점심특선","한정식","배달 안됨"],
+    ["도고온천정육식당","점심특선","고기",""],
+    ["예산밥반","한정식","한정식",""],
+    ["그린식당","들깨수제비,보리밥","수제비/한식",""],
+    ["온밥","명란크림우동,연어덮밥","일식/양식",""],
+    ["모도리국밥","모도리국밥,머리국밥,모듬국밥,수육국밥","국밥",""],
+    ["포아이니","쌀국수","베트남쌀국수",""],
+    ["원조설악추어탕","추어탕,솥밥","탕",""],
+    ["단풍갈국수","굴떡국,굴칼국수","국수",""],
+    ["동이식당","곤드레밥,김치제육찜밥","한식/고기",""],
+    ["남해갈치집","코다리정식,갈치정식","생선정식",""],
+    ["향촌식당","민물새우탕,콩국수","탕/국수",""],
+    ["왕고양푼이동태찌개","양푼이동태찌개","찌개",""],
+    ["수석아구","점심특선(대구탕)","탕",""]
+  ].map(function(r){ return {name:r[0], menu:r[1], category:r[2], note:r[3]}; });
+
+  var PRICE_BY_CATEGORY = {
+    "찌개":8000,"탕":9000,"국밥":9000,"국밥/탕":9500,"국수":8000,"고기":12000,"고기(닭)":11000,
+    "해물":11000,"뷔페":9000,"돈까스/양식":9000,"일식/초밥":10000,"일식/양식":10000,"백숙/삼계탕":14000,
+    "쌈밥":9000,"한정식":10000,"백반":8000,"조림":10000,"조림/쌈밥":10000,"생선정식":11000,"도시락":7000,
+    "도시락/고기":8000,"중식":8000,"솥밥":9000,"솥밥/비빔밥":9000,"냉면/쌈밥":9500,"찜":11000,"찜/조림":11000,
+    "찜/백숙":12000,"죽/탕":8500,"베트남쌀국수":9000,"찌개/국수":8500,"찌개/한식":8000,"찌개/고기":11000,
+    "보리밥/한식":8000,"수제비/한식":8000,"생선/해물":11000,"탕/국수":9000,"한식/고기":9000,"기타":9000
+  };
+  function priceFor(cat){ return PRICE_BY_CATEGORY[cat] || 9000; }
+
+  // 2026년 9월 실제 정산 내역 (사용자가 제공한 밥장학사 시트 값 그대로) — 최초 1회만 시딩
+  var SEPTEMBER_2026_SEED = {
+    "2026-09-01": {items:[
+      {restaurant:"바다양푼이동태탕", menu:"동태탕", amount:44000, payer:"김혜정",
+        attendees:["윤도영","윤성인","김혜정","박윤희"]}
+    ]},
+    "2026-09-02": {items:[
+      {restaurant:"153포인츠부대찌개", menu:"부대찌개", amount:75500, payer:"김혜정",
+        attendees:["교육장","교육과장","김혜정","박윤희","이은혜","박상호","이경희"]}
+    ]},
+    "2026-09-03": {items:[
+      {restaurant:"우성쭈꾸미", menu:"쭈꾸미정식", amount:84000, payer:"김혜정",
+        attendees:["교육장","권유석","윤성인","김혜정","이은혜","박상호"]}
+    ]},
+    "2026-09-04": {items:[
+      {restaurant:"향촌", menu:"민물새우탕", amount:92000, payer:"김혜정",
+        attendees:["권유석","박은주","윤성인","김혜정","박윤희","이은혜","박상호","이경희"]}
+    ]},
+    "2026-09-07": {items:[
+      {restaurant:"맛나감자탕", menu:"목뼈해장국", amount:80000, payer:"박은주",
+        attendees:["교육장","교육과장","권유석","박은주","윤도영","김혜정","이은혜","박상호"]}
+    ]},
+    "2026-09-08": {items:[
+      {restaurant:"바다양푼이동태탕", menu:"동태탕", amount:77000, payer:"윤도영",
+        attendees:["교육과장","권유석","윤도영","윤성인","이은혜","박상호","이경희"]}
+    ]},
+    "2026-09-09": {items:[
+      {restaurant:"노브랜드", menu:"고추장/간장 불고기", amount:70000, payer:"박윤희",
+        attendees:["교육장","교육과장","박은주","윤도영","박윤희","박상호","이경희"]}
+    ]},
+    "2026-09-10": {items:[
+      {restaurant:"수석아구", menu:"복지리", amount:85000, payer:"김혜정",
+        attendees:["교육장","교육과장","윤도영","김혜정","이은혜"]}
+    ]},
+    "2026-09-11": {items:[
+      {restaurant:"예산시장", menu:"시장닭+국수", amount:38000, payer:"박윤희",
+        attendees:["윤도영","박윤희","이은혜","이경희"]},
+      {restaurant:"예산시장", menu:"생수", amount:4000, payer:"이경희",
+        attendees:["윤도영","박윤희","이은혜","이경희"]},
+      {restaurant:"예산시장", menu:"순대", amount:6000, payer:"윤도영",
+        attendees:["윤도영","박윤희","이은혜","이경희"]}
+    ]},
+    "2026-09-14": {items:[
+      {restaurant:"한촌설렁탕", menu:"설렁탕, 얼큰설렁탕", amount:72000, payer:"이은혜",
+        attendees:["권유석","윤도영","김혜정","이은혜","박상호","이경희"]}
+    ]}
+  };
+
+  // ---------- State ----------
+  var today = new Date();
+  var state = {
+    year: Math.min(2030, Math.max(2026, today.getFullYear())),
+    month: today.getMonth()+1,
+    roster: DEFAULT_ROSTER.slice(),
+    restaurants: DEFAULT_RESTAURANTS.slice(),
+    meals: {},           // dateStr -> {items:[{restaurant,menu,payer,attendees,amount}, ...]}
+    editingDate: null,
+    editingItems: [],
+    editingExisting: false,
+    editingTitle: "",
+    unsubMeals: null,
+    paidOverride: {},     // 이 달 '실제 결제액' 직접 입력값 {이름: 금액}
+    unsubSettle: null,
+    settleDirty: false,
+    unlocked: false,      // 수정 잠금 해제 여부 (기본은 잠김)
+    auth: null,           // {salt, iter, hash} — 저장된 비밀번호 해시
+    token: "",            // 이 화면에서 통과한 비밀번호 해시(세션 동안만 유지)
+    authMode: null,
+    authAfter: null
+  };
+
+  function dateStr(y,m,d){
+    return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+  }
+  function todayStr(){ var t=new Date(); return dateStr(t.getFullYear(), t.getMonth()+1, t.getDate()); }
+
+  // ---------- Storage backend ----------
+  var backend = null; // set after init
+  var LS_KEYS = {rest:"bjhs_restaurants", roster:"bjhs_roster", meals:"bjhs_meals", auth:"bjhs_auth", settle:"bjhs_settle"};
+
+  function makeLocalBackend(){
+    function readJSON(key, fallback){
+      try{ var raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }
+      catch(e){ return fallback; }
+    }
+    function writeJSON(key, val){
+      try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){}
+    }
+    return {
+      kind:"local",
+      async getRestaurants(){ return readJSON(LS_KEYS.rest, DEFAULT_RESTAURANTS); },
+      async saveRestaurants(list){ writeJSON(LS_KEYS.rest, list); },
+      async getRoster(){ return readJSON(LS_KEYS.roster, DEFAULT_ROSTER); },
+      async saveRoster(list){ writeJSON(LS_KEYS.roster, list); },
+      async hasSeeded(){ return !!readJSON("bjhs_seeded", false); },
+      async markSeeded(){ writeJSON("bjhs_seeded", true); },
+      watchSettle(year, month, cb){
+        var ym = year+"-"+String(month).padStart(2,"0");
+        function push(){ var all = readJSON(LS_KEYS.settle, {}); cb((all[ym] && all[ym].paid) || {}); }
+        push();
+        function onStorage(e){ if(!e || e.key===LS_KEYS.settle) push(); }
+        window.addEventListener("storage", onStorage);
+        return function(){ window.removeEventListener("storage", onStorage); };
+      },
+      async saveSettle(year, month, paid){
+        var ym = year+"-"+String(month).padStart(2,"0");
+        var all = readJSON(LS_KEYS.settle, {});
+        all[ym] = {year:year, month:month, paid:paid};
+        writeJSON(LS_KEYS.settle, all);
+      },
+      async getAuth(){ return readJSON(LS_KEYS.auth, null); },
+      async saveAuth(obj){
+        try{ localStorage.setItem(LS_KEYS.auth, JSON.stringify(obj)); }
+        catch(e){ throw new Error("이 브라우저에 저장하지 못했습니다."); }
+      },
+      watchAuth(cb){
+        cb(readJSON(LS_KEYS.auth, null));
+        function onStorage(e){ if(!e || e.key===LS_KEYS.auth) cb(readJSON(LS_KEYS.auth, null)); }
+        window.addEventListener("storage", onStorage);
+        return function(){ window.removeEventListener("storage", onStorage); };
+      },
+      watchMonth(year, month, cb){
+        function push(){
+          var all = readJSON(LS_KEYS.meals, {});
+          var out = {};
+          Object.keys(all).forEach(function(k){
+            var parts = k.split("-");
+            if(+parts[0]===year && +parts[1]===month) out[k]=all[k];
+          });
+          cb(out);
+        }
+        push();
+        function onStorage(e){ if(!e || e.key===LS_KEYS.meals) push(); }
+        window.addEventListener("storage", onStorage);
+        return function(){ window.removeEventListener("storage", onStorage); };
+      },
+      async saveMeal(ds, data){
+        var all = readJSON(LS_KEYS.meals, {});
+        all[ds] = data;
+        writeJSON(LS_KEYS.meals, all);
+      },
+      async deleteMeal(ds){
+        var all = readJSON(LS_KEYS.meals, {});
+        delete all[ds];
+        writeJSON(LS_KEYS.meals, all);
+      }
+    };
+  }
+
+  function makeDbBackend(db){
+    var restRef = db.doc("config/restaurants");
+    var rosterRef = db.doc("config/roster");
+    var mealsCol = db.collection("meals");
+    var authRef = db.doc("config/auth");
+    return {
+      kind:"db",
+      async getRestaurants(){
+        var snap = await restRef.get();
+        if(snap.exists && snap.data() && Array.isArray(snap.data().list)) return snap.data().list;
+        await restRef.set({list: DEFAULT_RESTAURANTS});
+        return DEFAULT_RESTAURANTS;
+      },
+      async saveRestaurants(list){ await restRef.set({list:list}); },
+      async getRoster(){
+        var snap = await rosterRef.get();
+        if(snap.exists && snap.data() && Array.isArray(snap.data().people)) return snap.data().people;
+        await rosterRef.set({people: DEFAULT_ROSTER});
+        return DEFAULT_ROSTER;
+      },
+      async saveRoster(list){ await rosterRef.set({people:list}); },
+      async hasSeeded(){
+        var snap = await db.doc("config/meta").get();
+        return !!(snap.exists && snap.data() && snap.data().seeded);
+      },
+      async markSeeded(){ await db.doc("config/meta").set({seeded:true}); },
+      watchSettle(year, month, cb){
+        var ref = db.doc("settle/"+year+"-"+String(month).padStart(2,"0"));
+        return ref.onSnapshot(function(snap){
+          var d = snap.exists ? snap.data() : null;
+          cb((d && d.paid) || {});
+        }, function(err){ console.warn("settle watch error", err); });
+      },
+      async saveSettle(year, month, paid){
+        await db.doc("settle/"+year+"-"+String(month).padStart(2,"0")).set({year:year, month:month, paid:paid});
+      },
+      async getAuth(){
+        var snap = await authRef.get();
+        return (snap.exists && snap.data() && snap.data().hash) ? snap.data() : null;
+      },
+      async saveAuth(obj){ await authRef.set(obj); },
+      watchAuth(cb){
+        return authRef.onSnapshot(function(snap){
+          var d = snap.exists ? snap.data() : null;
+          cb(d && d.hash ? d : null);
+        }, function(err){ console.warn("auth watch error", err); });
+      },
+      watchMonth(year, month, cb){
+        var q = mealsCol.where("year","==",year).where("month","==",month);
+        return q.onSnapshot(function(snap){
+          var out = {};
+          snap.docs.forEach(function(d){ out[d.id] = d.data(); });
+          cb(out);
+        }, function(err){ console.warn("meals watch error", err); });
+      },
+      async saveMeal(ds, data){
+        var parts = ds.split("-");
+        var full = Object.assign({}, data, {year:+parts[0], month:+parts[1], day:+parts[2]});
+        await mealsCol.doc(ds).set(full);
+      },
+      async deleteMeal(ds){ await mealsCol.doc(ds).delete(); }
+    };
+  }
+
+  async function initBackend(){
+    var db = null;
+    try{
+      if(window.claude && typeof window.claude.use === "function"){
+        db = await window.claude.use("db");
+      }
+    }catch(e){ db = null; }
+    backend = db ? makeDbBackend(db) : makeLocalBackend();
+    state.unwatchAuth = backend.watchAuth(applyAuth);
+    document.getElementById("storageBadge").textContent =
+      backend.kind==="db" ? "실시간 공유 저장 중" : "이 브라우저에만 저장됨(공유 저장 기능 미사용)";
+    var r = await backend.getRestaurants();
+    var ro = await backend.getRoster();
+    state.restaurants = r && r.length ? r : DEFAULT_RESTAURANTS;
+    state.roster = ro && ro.length ? ro : DEFAULT_ROSTER;
+    try{
+      var seeded = await backend.hasSeeded();
+      if(!seeded){
+        var writes = Object.keys(SEPTEMBER_2026_SEED).map(function(ds){
+          return backend.saveMeal(ds, SEPTEMBER_2026_SEED[ds]);
+        });
+        await Promise.all(writes);
+        await backend.markSeeded();
+      }
+    }catch(e){ console.warn("seed skipped", e); }
+    watchCurrentMonth();
+    renderAll();
+  }
+
+  function watchCurrentMonth(){
+    if(state.unsubMeals) state.unsubMeals();
+    state.meals = {};
+    state.unsubMeals = backend.watchMonth(state.year, state.month, function(m){
+      state.meals = m || {};
+      renderAll();
+    });
+    if(state.unsubSettle) state.unsubSettle();
+    state.paidOverride = {};
+    state.unsubSettle = backend.watchSettle(state.year, state.month, function(p){
+      state.paidOverride = p || {};
+      renderAll();
+    });
+  }
+
+  // ---------- Calendar rendering ----------
+  var DOW = ["일","월","화","수","목","금","토"];
+  var yearSel = document.getElementById("yearSel");
+  var monthSel = document.getElementById("monthSel");
+  for(var y=2026;y<=2030;y++){
+    var o=document.createElement("option"); o.value=y; o.textContent=y+"년"; yearSel.appendChild(o);
+  }
+  for(var m=1;m<=12;m++){
+    var om=document.createElement("option"); om.value=m; om.textContent=m+"월"; monthSel.appendChild(om);
+  }
+  var dowRow = document.getElementById("dowRow");
+  DOW.forEach(function(d){ var el=document.createElement("div"); el.textContent=d; dowRow.appendChild(el); });
+
+  function isWeekend(dow){ return dow===0 || dow===6; }
+
+  function renderCalendar(){
+    yearSel.value = state.year;
+    monthSel.value = state.month;
+    var grid = document.getElementById("calGrid");
+    grid.innerHTML = "";
+    var first = new Date(state.year, state.month-1, 1);
+    var startDow = first.getDay();
+    var daysInMonth = new Date(state.year, state.month, 0).getDate();
+    var tstr = todayStr();
+
+    for(var i=0;i<startDow;i++){
+      var blank = document.createElement("div"); blank.className="cell blank"; grid.appendChild(blank);
+    }
+    for(var d=1; d<=daysInMonth; d++){
+      var dow = new Date(state.year, state.month-1, d).getDay();
+      var ds = dateStr(state.year, state.month, d);
+      var cell = document.createElement("button");
+      cell.type="button";
+      cell.className = "cell" + (isWeekend(dow)?" weekend":"") + (ds===tstr?" today":"");
+      var meal = state.meals[ds];
+      var items = meal && meal.items ? meal.items : [];
+      var html = '<span class="dnum">'+d+'</span>';
+      if(items.length){
+        var first = items[0];
+        var nameLabel = escapeHtml(first.restaurant||"") + (items.length>1 ? " 외 "+(items.length-1)+"건" : "");
+        var total = items.reduce(function(s,it){ return s+(Number(it.amount)||0); }, 0);
+        var uniqAttendees = {};
+        items.forEach(function(it){ (it.attendees||[]).forEach(function(p){ uniqAttendees[p]=1; }); });
+        var attCount = Object.keys(uniqAttendees).length;
+        html += '<span class="meal-name">'+nameLabel+'</span>';
+        if(items.length===1 && first.menu) html += '<span class="meal-menu">'+escapeHtml(first.menu)+'</span>';
+        html += '<span class="meal-amt">'+(total? total.toLocaleString()+"원":"")+'</span>';
+        if(attCount) html += '<span class="badge">'+attCount+'명</span>';
+      }
+      cell.innerHTML = html;
+      cell.addEventListener("click", function(dsClicked){ return function(){ openDayModal(dsClicked); }; }(ds));
+      grid.appendChild(cell);
+    }
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  // ---------- Settlement data (shared by the HTML table and the Excel export) ----------
+  function computeMonthSettlement(){
+    var roster = state.roster;
+    var daysInMonth = new Date(state.year, state.month, 0).getDate();
+    var owed = {}, paid = {};
+    roster.forEach(function(p){ owed[p]=0; paid[p]=0; });
+
+    var dayRows = []; // {d, dow, isWeekend, hasData, restLabel, menuLabel, payerLabel, dayTotal, attendeeCount, perPerson:{name:amount}}
+    var monthTotal = 0;
+
+    for(var d=1; d<=daysInMonth; d++){
+      var ds = dateStr(state.year, state.month, d);
+      var dow = new Date(state.year, state.month-1, d).getDay();
+      var meal = state.meals[ds];
+      var items = meal && meal.items ? meal.items.filter(function(it){ return it.restaurant; }) : [];
+      if(!items.length){
+        dayRows.push({d:d, dow:dow, isWeekend:isWeekend(dow), hasData:false});
+        continue;
+      }
+      var dayTotal = 0;
+      var perPersonToday = {};
+      items.forEach(function(it){
+        var attendees = it.attendees || [];
+        var amount = Number(it.amount)||0;
+        var share = attendees.length ? Math.round(amount/attendees.length) : 0;
+        dayTotal += amount;
+        monthTotal += amount;
+        if(it.payer) paid[it.payer] = (paid[it.payer]||0) + amount;
+        attendees.forEach(function(p){
+          owed[p] = (owed[p]||0) + share;
+          perPersonToday[p] = (perPersonToday[p]||0) + share;
+        });
+      });
+      var uniqToday = {};
+      items.forEach(function(it){ (it.attendees||[]).forEach(function(p){ uniqToday[p]=1; }); });
+      dayRows.push({
+        d:d, dow:dow, isWeekend:isWeekend(dow), hasData:true,
+        restLabel: items.map(function(it){ return it.restaurant; }).join(" + "),
+        menuLabel: items.map(function(it){ return it.menu; }).filter(Boolean).join(" / "),
+        payerLabel: items.length===1 ? (items[0].payer||"") : "여러 명 (항목별 상이)",
+        dayTotal: dayTotal,
+        attendeeCount: Object.keys(uniqToday).length,
+        perPerson: perPersonToday
+      });
+    }
+    var paidAuto = Object.assign({}, paid);
+    var overridden = {};
+    roster.forEach(function(p){
+      var v = state.paidOverride[p];
+      if(v!==undefined && v!==null && v!=="" && isFinite(Number(v))){
+        paid[p] = Number(v); overridden[p] = true;
+      }
+    });
+    return {roster:roster, dayRows:dayRows, monthTotal:monthTotal, owed:owed, paid:paid, paidAuto:paidAuto, overridden:overridden};
+  }
+
+  // ---------- Settlement table (HTML) ----------
+  function renderSettleTable(){
+    document.getElementById("settleTitle").textContent = state.year+"년 "+state.month+"월 정산표";
+    var table = document.getElementById("settleTable");
+    var data = computeMonthSettlement();
+    var roster = data.roster;
+
+    var thead = "<thead><tr>"+
+      "<th>날짜</th><th>요일</th><th class='left'>식당</th><th class='left'>메뉴</th><th>계산한 사람</th><th>금액</th><th>참석인원</th>"+
+      roster.map(function(p){return "<th>"+escapeHtml(p)+"</th>";}).join("")+
+      "</tr></thead>";
+
+    var rows = data.dayRows.map(function(row){
+      var rowClass = row.isWeekend ? "weekend-row" : "";
+      if(!row.hasData){
+        return "<tr class='"+rowClass+"'><td>"+row.d+"</td><td>"+DOW[row.dow]+"</td><td class='left dim' colspan='5'>-</td>"+
+          roster.map(function(){return "<td>-</td>";}).join("")+"</tr>";
+      }
+      return "<tr class='"+rowClass+"'>"+
+        "<td>"+row.d+"</td><td>"+DOW[row.dow]+"</td>"+
+        "<td class='left'>"+escapeHtml(row.restLabel)+"</td>"+
+        "<td class='left'>"+escapeHtml(row.menuLabel)+"</td>"+
+        "<td>"+escapeHtml(row.payerLabel)+"</td>"+
+        "<td>"+row.dayTotal.toLocaleString()+"</td>"+
+        "<td>"+row.attendeeCount+"명</td>"+
+        roster.map(function(p){
+          var v = row.perPerson[p];
+          return "<td>"+(v? v.toLocaleString():"-")+"</td>";
+        }).join("")+
+        "</tr>";
+    }).join("");
+
+    var totalRow = "<tr class='total-row'><td colspan='5' class='left'>월 합계</td><td>"+data.monthTotal.toLocaleString()+"</td><td></td>"+
+      roster.map(function(p){return "<td>"+data.owed[p].toLocaleString()+"</td>";}).join("")+"</tr>";
+
+    var paidRow = "<tr><td colspan='6' class='left dim'>실제 결제액 (계산한 사람 기준 · 직접 입력 가능)</td><td></td>"+
+      roster.map(function(p){
+        var isOv = !!data.overridden[p];
+        var auto = data.paidAuto[p]||0;
+        if(state.unlocked){
+          return "<td class='paid-cell"+(isOv?" override":"")+"'><input type='number' min='0' step='100' inputmode='numeric' class='paid-input' data-p='"+escapeHtml(p)+"'"+
+            " value='"+(isOv ? data.paid[p] : "")+"' placeholder='"+(auto ? auto.toLocaleString() : "-")+"'"+
+            " title='"+(isOv ? "직접 입력한 값 (자동 계산값 "+auto.toLocaleString()+"원)" : "비워두면 자동 계산값")+"'></td>";
+        }
+        var txt = data.paid[p] ? data.paid[p].toLocaleString() : "-";
+        return isOv
+          ? "<td class='override-val' title='직접 입력한 값 (자동 계산값 "+auto.toLocaleString()+"원)'>"+txt+" ✎</td>"
+          : "<td class='dim'>"+txt+"</td>";
+      }).join("")+"</tr>";
+
+    var settleRow = "<tr class='settle-row'><td colspan='6' class='left'>정산액 (부담액 − 결제액)</td><td></td>"+
+      roster.map(function(p){
+        var net = data.owed[p]-data.paid[p];
+        var cls = net>0 ? "amt-owe" : (net<0 ? "amt-refund" : "");
+        var label = net===0 ? "0" : (net>0 ? "+"+net.toLocaleString() : net.toLocaleString());
+        return "<td class='"+cls+"'>"+label+"</td>";
+      }).join("")+"</tr>";
+
+    table.innerHTML = thead + "<tbody>"+rows+totalRow+paidRow+settleRow+"</tbody>";
+  }
+
+  function settleInputFocused(){
+    var a = document.activeElement;
+    return !!(a && a.classList && a.classList.contains("paid-input"));
+  }
+  function renderAll(){
+    renderCalendar();
+    if(settleInputFocused()){ state.settleDirty = true; } else { renderSettleTable(); }
+    updateRegenInput();
+  }
+
+  // ---------- Excel export ----------
+  async function exportToExcel(){
+    if(typeof XLSX === "undefined"){
+      alert("엑셀 내보내기 기능을 아직 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.");
+      return;
+    }
+    var downloads = null;
+    try{
+      if(window.claude && typeof window.claude.use === "function"){
+        downloads = await window.claude.use("downloads");
+      }
+    }catch(e){ downloads = null; }
+    if(!downloads){
+      alert("이 화면에서는 파일 다운로드 기능을 사용할 수 없습니다.");
+      return;
+    }
+
+    var data = computeMonthSettlement();
+    var roster = data.roster;
+    var header = ["날짜","요일","식당","메뉴","계산한 사람","금액","참석인원"].concat(roster);
+    var aoa = [header];
+    data.dayRows.forEach(function(row){
+      if(!row.hasData){
+        aoa.push([row.d, DOW[row.dow], "", "", "", "", ""].concat(roster.map(function(){ return ""; })));
+        return;
+      }
+      aoa.push(
+        [row.d, DOW[row.dow], row.restLabel, row.menuLabel, row.payerLabel, row.dayTotal, row.attendeeCount]
+          .concat(roster.map(function(p){ return row.perPerson[p] || ""; }))
+      );
+    });
+    aoa.push(["월 합계","","","","", data.monthTotal, ""].concat(roster.map(function(p){ return data.owed[p]; })));
+    aoa.push(["실제 결제액","","","","","",""].concat(roster.map(function(p){ return data.paid[p]||""; })));
+    aoa.push(["정산액(부담액-결제액)","","","","","",""].concat(roster.map(function(p){ return data.owed[p]-data.paid[p]; })));
+
+    var ws = XLSX.utils.aoa_to_sheet(aoa);
+    ws["!cols"] = [{wch:5},{wch:5},{wch:24},{wch:24},{wch:12},{wch:10},{wch:8}].concat(roster.map(function(){return {wch:10};}));
+
+    var restAoa = [["상호명","주메뉴","분류","비고"]].concat(
+      state.restaurants.map(function(r){ return [r.name, r.menu, r.category, r.note||""]; })
+    );
+    var wsRest = XLSX.utils.aoa_to_sheet(restAoa);
+    wsRest["!cols"] = [{wch:20},{wch:30},{wch:14},{wch:16}];
+
+    var wsRoster = XLSX.utils.aoa_to_sheet([["이름"]].concat(roster.map(function(p){ return [p]; })));
+    wsRoster["!cols"] = [{wch:12}];
+
+    var wb = XLSX.utils.book_new();
+    var sheetName = (state.year+"년 "+state.month+"월 정산표").slice(0,31);
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    XLSX.utils.book_append_sheet(wb, wsRest, "식당목록");
+    XLSX.utils.book_append_sheet(wb, wsRoster, "참여자명단");
+
+    var wbout = XLSX.write(wb, {bookType:"xlsx", type:"array"});
+    var blob = new Blob([wbout], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+    var filename = state.year+"년_"+state.month+"월_밥장학사_정산표.xlsx";
+    try{
+      await downloads.save({filename:filename, data:blob});
+    }catch(err){
+      if(!err || err.code!=="declined"){
+        alert("내보내기에 실패했습니다: "+(err && err.message ? err.message : err));
+      }
+    }
+  }
+
+  document.getElementById("exportExcelBtn").addEventListener("click", async function(){
+    var btn = this;
+    var orig = btn.textContent;
+    btn.disabled = true; btn.textContent = "내보내는 중...";
+    try{ await exportToExcel(); }
+    finally{ btn.disabled=false; btn.textContent=orig; }
+  });
+
+  // ---------- Day modal (supports multiple charges per day) ----------
+  var dayOverlay = document.getElementById("dayOverlay");
+  var itemsContainer = document.getElementById("itemsContainer");
+  var restList = document.getElementById("restList");
+  var itemIdSeq = 0;
+
+  function findRestaurant(name){
+    return state.restaurants.find(function(r){ return r.name===name; });
+  }
+  function populateRestList(){
+    restList.innerHTML = state.restaurants.map(function(r){ return "<option value='"+escapeHtml(r.name)+"'>"; }).join("");
+  }
+  function newBlankItem(){
+    return { _id:"it"+(itemIdSeq++), restaurant:"", menu:"", amount:0, payer:state.roster[0]||"", attendees: state.roster.slice() };
+  }
+
+  function itemCardHtml(item, idx, total){
+    var ro = !state.unlocked;
+    var dis = ro ? " disabled" : "";
+    var payerOptions = (item.payer ? "" : "<option value=''>선택 안 됨</option>") + state.roster.map(function(p){
+      return "<option value='"+escapeHtml(p)+"'"+(p===item.payer?" selected":"")+">"+escapeHtml(p)+"</option>";
+    }).join("");
+    var attendeeChips = state.roster.map(function(p){
+      var checked = (item.attendees||[]).indexOf(p)>-1;
+      return "<label class='"+(checked?"checked":"")+"'><input type='checkbox' value='"+escapeHtml(p)+"' "+(checked?"checked":"")+dis+"> "+escapeHtml(p)+"</label>";
+    }).join("");
+    var amt = Number(item.amount)||0;
+    var attCount = (item.attendees||[]).length;
+    var share = attCount ? Math.round(amt/attCount) : 0;
+    return (
+      "<div class='item-card"+(ro?" readonly":"")+"' data-id='"+item._id+"'>"+
+        "<div class='item-head'><span>결제 항목 "+(idx+1)+"</span>"+
+          (total>1 && !ro ? "<button type='button' class='item-remove' data-act='remove-item'>삭제</button>" : "")+
+        "</div>"+
+        "<div class='field'><label>식당명</label>"+
+          "<input type='text' data-f='restaurant' list='restList' autocomplete='off' value='"+escapeHtml(item.restaurant)+"' placeholder='예: 소반'"+dis+">"+
+        "</div>"+
+        "<div class='field'><label>메뉴</label>"+
+          "<input type='text' data-f='menu' value='"+escapeHtml(item.menu)+"' placeholder='예: 순두부'"+dis+">"+
+        "</div>"+
+        "<div class='row2'>"+
+          "<div class='field'><label>금액 (원)</label><input type='number' min='0' step='500' data-f='amount' value='"+(amt||"")+"'"+dis+"></div>"+
+          "<div class='field'><label>계산한 사람</label><select data-f='payer'"+dis+">"+payerOptions+"</select></div>"+
+        "</div>"+
+        "<div class='field'><label>참석자</label><div class='attendee-grid compact' data-role='attendees'>"+attendeeChips+"</div></div>"+
+        "<div class='share-line'><span data-role='count'>"+attCount+"명 참석</span><span data-role='share'>1인당 "+share.toLocaleString()+"원</span></div>"+
+      "</div>"
+    );
+  }
+
+  function renderItemCards(){
+    if(!state.unlocked && !state.editingExisting){
+      itemsContainer.innerHTML = "<div class='note'>등록된 식사 정보가 없습니다. 내용을 입력하려면 아래에서 잠금을 해제해 주세요.</div>";
+    } else {
+      itemsContainer.innerHTML = state.editingItems.map(function(item, idx){
+        return itemCardHtml(item, idx, state.editingItems.length);
+      }).join("");
+    }
+    updateDayTotalLine();
+  }
+
+  function updateDayTotalLine(){
+    var total = state.editingItems.reduce(function(s,it){ return s+(Number(it.amount)||0); }, 0);
+    document.getElementById("dayTotalCount").textContent = state.editingItems.length+"건";
+    document.getElementById("dayTotalAmt").textContent = "합계 "+total.toLocaleString()+"원";
+  }
+
+  function itemFromCard(card){
+    var id = card.dataset.id;
+    return state.editingItems.find(function(it){ return it._id===id; });
+  }
+  function refreshCardShare(card){
+    var item = itemFromCard(card);
+    var attCount = (item.attendees||[]).length;
+    var share = attCount ? Math.round((Number(item.amount)||0)/attCount) : 0;
+    card.querySelector("[data-role='count']").textContent = attCount+"명 참석";
+    card.querySelector("[data-role='share']").textContent = "1인당 "+share.toLocaleString()+"원";
+  }
+
+  itemsContainer.addEventListener("input", function(e){
+    if(!state.unlocked) return;
+    var card = e.target.closest(".item-card");
+    if(!card) return;
+    var item = itemFromCard(card);
+    var f = e.target.dataset.f;
+    if(f==="restaurant"){
+      item.restaurant = e.target.value;
+      var r = findRestaurant(e.target.value.trim());
+      if(r){ item.menu = r.menu; card.querySelector("[data-f='menu']").value = r.menu; }
+    } else if(f==="menu"){
+      item.menu = e.target.value;
+    } else if(f==="amount"){
+      item.amount = Number(e.target.value)||0;
+      refreshCardShare(card);
+      updateDayTotalLine();
+    }
+  });
+  itemsContainer.addEventListener("change", function(e){
+    if(!state.unlocked) return;
+    var card = e.target.closest(".item-card");
+    if(!card) return;
+    var item = itemFromCard(card);
+    if(e.target.dataset.f==="payer"){
+      item.payer = e.target.value;
+    } else if(e.target.type==="checkbox"){
+      var label = e.target.closest("label");
+      label.className = e.target.checked ? "checked" : "";
+      item.attendees = Array.from(card.querySelectorAll("[data-role='attendees'] input:checked")).map(function(i){return i.value;});
+      refreshCardShare(card);
+    }
+  });
+  itemsContainer.addEventListener("click", function(e){
+    if(!state.unlocked) return;
+    if(e.target.dataset.act==="remove-item"){
+      var card = e.target.closest(".item-card");
+      var id = card.dataset.id;
+      state.editingItems = state.editingItems.filter(function(it){ return it._id!==id; });
+      renderItemCards();
+    }
+  });
+  document.getElementById("addItemBtn").addEventListener("click", function(){
+    if(!state.unlocked) return;
+    state.editingItems.push(newBlankItem());
+    renderItemCards();
+  });
+
+  function openDayModal(ds){
+    state.editingDate = ds;
+    var meal = state.meals[ds];
+    var d = new Date(ds+"T00:00:00");
+    state.editingTitle =
+      d.getFullYear()+"년 "+(d.getMonth()+1)+"월 "+d.getDate()+"일 ("+DOW[d.getDay()]+") 식사 정보";
+    populateRestList();
+    state.editingExisting = !!(meal && meal.items && meal.items.length);
+    if(state.editingExisting){
+      state.editingItems = meal.items.map(function(it){
+        return Object.assign({_id:"it"+(itemIdSeq++)}, it, {attendees:(it.attendees||[]).slice()});
+      });
+    } else {
+      state.editingItems = [newBlankItem()];
+    }
+    dayOverlay.hidden = false;
+    applyDayModalMode();
+  }
+  function closeDayModal(){ dayOverlay.hidden = true; state.editingDate = null; state.editingItems = []; state.editingExisting = false; }
+
+  // 잠김 상태에서는 내용만 보이고, 잠금을 풀면 곧바로 수정 화면으로 바뀝니다.
+  function applyDayModalMode(){
+    if(dayOverlay.hidden) return;
+    var ro = !state.unlocked;
+    document.getElementById("dayModalTitle").textContent = (state.editingTitle||"") + (ro ? " · 보기 전용" : "");
+    renderItemCards();
+    document.getElementById("addItemBtn").hidden = ro;
+    document.getElementById("saveDayBtn").hidden = ro;
+    document.getElementById("unlockDayBtn").hidden = !ro;
+    document.getElementById("dayTotalLine").hidden = ro && !state.editingExisting;
+    document.getElementById("deleteDayBtn").style.visibility = (!ro && state.editingExisting) ? "visible" : "hidden";
+  }
+
+  document.getElementById("cancelDayBtn").addEventListener("click", closeDayModal);
+  dayOverlay.addEventListener("click", function(e){ if(e.target===dayOverlay) closeDayModal(); });
+
+  document.getElementById("saveDayBtn").addEventListener("click", async function(){
+    if(!state.unlocked){ requireUnlock(null); return; }
+    var ds = state.editingDate; if(!ds) return;
+    var clean = state.editingItems
+      .filter(function(it){ return it.restaurant && it.restaurant.trim(); })
+      .map(function(it){
+        return { restaurant: it.restaurant.trim(), menu:(it.menu||"").trim(), amount:Number(it.amount)||0, payer: it.payer, attendees: it.attendees||[] };
+      });
+    try{
+      if(!clean.length){
+        await backend.deleteMeal(ds);
+        if(backend.kind==="local"){ delete state.meals[ds]; renderAll(); }
+        closeDayModal();
+        return;
+      }
+      var data = {items: clean};
+      await backend.saveMeal(ds, data);
+      if(backend.kind==="local"){ state.meals[ds]=data; renderAll(); }
+      closeDayModal();
+    }catch(err){ writeFailed(err); }
+  });
+  document.getElementById("deleteDayBtn").addEventListener("click", async function(){
+    if(!state.unlocked){ requireUnlock(null); return; }
+    var ds = state.editingDate; if(!ds) return;
+    try{
+      await backend.deleteMeal(ds);
+      if(backend.kind==="local"){ delete state.meals[ds]; renderAll(); }
+      closeDayModal();
+    }catch(err){ writeFailed(err); }
+  });
+
+  // ---------- Nav ----------
+  function goMonth(delta){
+    var idx = (state.year-2026)*12 + (state.month-1) + delta;
+    idx = Math.max(0, Math.min((2030-2026+1)*12-1, idx));
+    state.year = 2026 + Math.floor(idx/12);
+    state.month = (idx%12)+1;
+    watchCurrentMonth();
+    renderAll();
+  }
+  document.getElementById("prevMonth").addEventListener("click", function(){ goMonth(-1); });
+  document.getElementById("nextMonth").addEventListener("click", function(){ goMonth(1); });
+  yearSel.addEventListener("change", function(){ state.year=+yearSel.value; watchCurrentMonth(); renderAll(); });
+  monthSel.addEventListener("change", function(){ state.month=+monthSel.value; watchCurrentMonth(); renderAll(); });
+  document.getElementById("todayBtn").addEventListener("click", function(){
+    var t = new Date();
+    state.year = Math.min(2030, Math.max(2026, t.getFullYear()));
+    state.month = t.getMonth()+1;
+    watchCurrentMonth();
+    renderAll();
+  });
+
+  // ---------- Auto menu generation ----------
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var tmp=a[i]; a[i]=a[j]; a[j]=tmp;
+    }
+    return a;
+  }
+
+  function buildCategoryRotator(){
+    var categories = shuffle(Array.from(new Set(state.restaurants.map(function(r){return r.category;}))));
+    var byCategory = {};
+    categories.forEach(function(c){
+      byCategory[c] = shuffle(state.restaurants.filter(function(r){return r.category===c;}));
+    });
+    var catCursor = 0, lastUsedName = null;
+    return function nextRestaurantFor(dow){
+      var tries = 0;
+      while(tries < categories.length*2){
+        var cat = categories[catCursor % categories.length];
+        catCursor++;
+        var pool = byCategory[cat];
+        if(pool && pool.length){
+          var candidate = pool[0];
+          var closed = /월요일 휴무/.test(candidate.note||"") && dow===1;
+          if(!closed && candidate.name!==lastUsedName){
+            pool.push(pool.shift()); // rotate
+            lastUsedName = candidate.name;
+            return candidate;
+          }
+          pool.push(pool.shift());
+        }
+        tries++;
+      }
+      return state.restaurants[Math.floor(Math.random()*state.restaurants.length)];
+    };
+  }
+
+  // startDay: first day-of-month (inclusive) to (re)generate. overwrite: replace existing entries from startDay on.
+  // Days before startDay are never touched.
+  // opts.blankDetails: only assign restaurant+menu; leave amount/payer/attendees empty for manual entry later.
+  async function generateRange(startDay, overwrite, opts){
+    opts = opts || {};
+    var blank = !!opts.blankDetails;
+    var daysInMonth = new Date(state.year, state.month, 0).getDate();
+    var nextRestaurantFor = buildCategoryRotator();
+    var writes = [];
+    for(var d=startDay; d<=daysInMonth; d++){
+      var dow = new Date(state.year, state.month-1, d).getDay();
+      if(isWeekend(dow)) continue;
+      var ds = dateStr(state.year, state.month, d);
+      var hasExisting = state.meals[ds] && state.meals[ds].items && state.meals[ds].items.length;
+      if(hasExisting && !overwrite) continue;
+      var r = nextRestaurantFor(dow);
+      var data;
+      if(blank){
+        data = {items:[{restaurant:r.name, menu:r.menu, amount:0, payer:"", attendees:[]}]};
+      } else {
+        var attendees = state.roster.slice();
+        var payer = state.roster[(d-1) % state.roster.length];
+        var amount = priceFor(r.category) * attendees.length;
+        data = {items:[{restaurant:r.name, menu:r.menu, amount:amount, payer:payer, attendees:attendees}]};
+      }
+      writes.push(backend.saveMeal(ds, data));
+      if(backend.kind==="local"){
+        state.meals[ds] = data;
+      }
+    }
+    await Promise.all(writes);
+    renderAll();
+  }
+
+  document.getElementById("genMonthBtn").addEventListener("click", async function(){
+    var btn = this;
+    if(!state.unlocked){ requireUnlock(function(){ btn.click(); }); return; }
+    btn.disabled = true; btn.textContent = "생성 중...";
+    try{ await generateRange(1, false); }
+    catch(err){ writeFailed(err); }
+    finally{ btn.disabled=false; btn.textContent="이 달 메뉴 자동 생성"; }
+  });
+
+  function updateRegenInput(){
+    var input = document.getElementById("regenFromDate");
+    var daysInMonth = new Date(state.year, state.month, 0).getDate();
+    var min = dateStr(state.year, state.month, 1);
+    var max = dateStr(state.year, state.month, daysInMonth);
+    input.min = min; input.max = max;
+    var t = new Date();
+    var todayInMonth = (t.getFullYear()===state.year && (t.getMonth()+1)===state.month);
+    if(!input.value || input.value < min || input.value > max){
+      input.value = todayInMonth ? todayStr() : min;
+    }
+  }
+
+  document.getElementById("regenFromBtn").addEventListener("click", async function(){
+    var self = this;
+    if(!state.unlocked){ requireUnlock(function(){ self.click(); }); return; }
+    var input = document.getElementById("regenFromDate");
+    var val = input.value;
+    if(!val){ alert("재생성을 시작할 날짜를 선택해 주세요."); return; }
+    var parts = val.split("-").map(Number);
+    if(parts[0]!==state.year || parts[1]!==state.month){
+      alert("현재 보고 있는 "+state.year+"년 "+state.month+"월 안의 날짜를 선택해 주세요.");
+      return;
+    }
+    var day = parts[2];
+    var daysInMonth = new Date(state.year, state.month, 0).getDate();
+    var ok = confirm(
+      state.month+"월 "+day+"일부터 "+daysInMonth+"일까지 식당·메뉴만 새로 배정해 기존 내용을 덮어씁니다.\n"+
+      "참석인원과 금액은 비워두니 나중에 직접 입력해야 합니다.\n"+
+      (day>1 ? (state.month+"월 "+(day-1)+"일까지는 그대로 유지됩니다.\n") : "")+
+      "계속할까요?"
+    );
+    if(!ok) return;
+    var btn = this;
+    var orig = btn.textContent;
+    btn.disabled = true; btn.textContent = "생성 중...";
+    try{ await generateRange(day, true, {blankDetails:true}); }
+    catch(err){ writeFailed(err); }
+    finally{ btn.disabled=false; btn.textContent=orig; }
+  });
+
+  // ---------- Settings modal ----------
+  var settingsOverlay = document.getElementById("settingsOverlay");
+  var restMgmtList = document.getElementById("restMgmtList");
+  var rosterMgmtList = document.getElementById("rosterMgmtList");
+
+  function renderRestMgmt(){
+    restMgmtList.innerHTML = "";
+    state.restaurants.forEach(function(r, idx){
+      var row = document.createElement("div");
+      row.className = "mgmt-row";
+      row.innerHTML =
+        "<input data-f='name' value='"+escapeHtml(r.name)+"'>"+
+        "<input data-f='menu' value='"+escapeHtml(r.menu)+"'>"+
+        "<input data-f='category' value='"+escapeHtml(r.category)+"'>"+
+        "<button data-act='del'>삭제</button>";
+      row.dataset.idx = idx;
+      restMgmtList.appendChild(row);
+    });
+  }
+  function renderRosterMgmt(){
+    rosterMgmtList.innerHTML = "";
+    state.roster.forEach(function(p, idx){
+      var row = document.createElement("div");
+      row.className = "roster-row";
+      row.innerHTML = "<input value='"+escapeHtml(p)+"' style='flex:1'>"+
+        "<button data-act='del'>삭제</button>";
+      row.dataset.idx = idx;
+      rosterMgmtList.appendChild(row);
+    });
+  }
+
+  document.getElementById("settingsBtn").addEventListener("click", function(){
+    var self = this;
+    if(!state.unlocked){ requireUnlock(function(){ self.click(); }); return; }
+    renderRestMgmt(); renderRosterMgmt();
+    settingsOverlay.hidden = false;
+  });
+  document.getElementById("closeSettingsBtn").addEventListener("click", function(){ settingsOverlay.hidden = true; });
+  settingsOverlay.addEventListener("click", function(e){ if(e.target===settingsOverlay) settingsOverlay.hidden = true; });
+
+  document.getElementById("tabRestBtn").addEventListener("click", function(){
+    this.classList.add("active");
+    document.getElementById("tabRosterBtn").classList.remove("active");
+    document.getElementById("mgmtRest").hidden = false;
+    document.getElementById("mgmtRoster").hidden = true;
+  });
+  document.getElementById("tabRosterBtn").addEventListener("click", function(){
+    this.classList.add("active");
+    document.getElementById("tabRestBtn").classList.remove("active");
+    document.getElementById("mgmtRoster").hidden = false;
+    document.getElementById("mgmtRest").hidden = true;
+  });
+
+  restMgmtList.addEventListener("click", function(e){
+    if(e.target.dataset.act==="del"){
+      var idx = +e.target.closest(".mgmt-row").dataset.idx;
+      state.restaurants.splice(idx,1);
+      renderRestMgmt();
+    }
+  });
+  rosterMgmtList.addEventListener("click", function(e){
+    if(e.target.dataset.act==="del"){
+      var idx = +e.target.closest(".roster-row").dataset.idx;
+      state.roster.splice(idx,1);
+      renderRosterMgmt();
+    }
+  });
+  document.getElementById("addRestRow").addEventListener("click", function(){
+    state.restaurants.push({name:"새 식당", menu:"", category:"기타", note:""});
+    renderRestMgmt();
+  });
+  document.getElementById("addRosterRow").addEventListener("click", function(){
+    state.roster.push("새 인원");
+    renderRosterMgmt();
+  });
+
+  document.getElementById("saveRestBtn").addEventListener("click", async function(){
+    if(!state.unlocked){ requireUnlock(null); return; }
+    var rows = restMgmtList.querySelectorAll(".mgmt-row");
+    var list = Array.from(rows).map(function(row){
+      var inputs = row.querySelectorAll("input");
+      return {
+        name: inputs[0].value.trim(),
+        menu: inputs[1].value.trim(),
+        category: inputs[2].value.trim() || "기타",
+        note: ""
+      };
+    }).filter(function(r){ return r.name; });
+    try{ await backend.saveRestaurants(list); }
+    catch(err){ writeFailed(err); return; }
+    state.restaurants = list;
+    populateRestList();
+    alert("식당 목록이 저장되었습니다.");
+  });
+  document.getElementById("saveRosterBtn").addEventListener("click", async function(){
+    if(!state.unlocked){ requireUnlock(null); return; }
+    var rows = rosterMgmtList.querySelectorAll(".roster-row");
+    var list = Array.from(rows).map(function(row){ return row.querySelector("input").value.trim(); })
+      .filter(function(n){ return n; });
+    try{ await backend.saveRoster(list); }
+    catch(err){ writeFailed(err); return; }
+    state.roster = list;
+    renderAll();
+    alert("참여자 명단이 저장되었습니다.");
+  });
+
+  // ---------- Edit lock (password) ----------
+  // 보기는 누구나, 수정은 비밀번호로. 비밀번호 자체는 저장하지 않고 PBKDF2-SHA256 해시(+솔트)만 저장합니다.
+  var PW_MIN_LEN = 4;
+  var PBKDF2_ITER = 100000;
+  var SESSION_KEY = "bjhs_unlock";
+
+  var lockBtn = document.getElementById("lockBtn");
+  var changePwBtn = document.getElementById("changePwBtn");
+  var lockPill = document.getElementById("lockPill");
+  var authOverlay = document.getElementById("authOverlay");
+  var authTitle = document.getElementById("authTitle");
+  var authDesc = document.getElementById("authDesc");
+  var authCurField = document.getElementById("authCurField");
+  var authNewField = document.getElementById("authNewField");
+  var authNew2Field = document.getElementById("authNew2Field");
+  var authCur = document.getElementById("authCur");
+  var authNew = document.getElementById("authNew");
+  var authNew2 = document.getElementById("authNew2");
+  var authError = document.getElementById("authError");
+  var authOkBtn = document.getElementById("authOkBtn");
+  var authCancelBtn = document.getElementById("authCancelBtn");
+
+  function getSessionToken(){ try{ return sessionStorage.getItem(SESSION_KEY) || ""; }catch(e){ return ""; } }
+  function setSessionToken(v){
+    try{ if(v) sessionStorage.setItem(SESSION_KEY, v); else sessionStorage.removeItem(SESSION_KEY); }catch(e){}
+  }
+
+  function cryptoOk(){ return !!(window.crypto && window.crypto.subtle && window.TextEncoder); }
+  function toHex(buf){
+    return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,"0"); }).join("");
+  }
+  function fromHex(hex){
+    var out = new Uint8Array(hex.length/2);
+    for(var i=0;i<out.length;i++) out[i] = parseInt(hex.substr(i*2,2), 16);
+    return out;
+  }
+  async function deriveHash(pw, saltHex, iter){
+    var key = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveBits"]);
+    var bits = await crypto.subtle.deriveBits({name:"PBKDF2", salt:fromHex(saltHex), iterations:iter, hash:"SHA-256"}, key, 256);
+    return toHex(bits);
+  }
+  async function makeAuth(pw){
+    var salt = toHex(crypto.getRandomValues(new Uint8Array(16)));
+    return {salt:salt, iter:PBKDF2_ITER, hash: await deriveHash(pw, salt, PBKDF2_ITER), updatedAt: Date.now()};
+  }
+
+  function writeFailed(err){
+    alert("저장하지 못했습니다. 이 페이지의 편집 권한이 없거나 네트워크에 문제가 있을 수 있습니다."+
+      (err && err.message ? "\n("+err.message+")" : ""));
+  }
+
+  // 저장된 비밀번호 해시가 바뀔 때마다(다른 기기에서 변경 포함) 호출됩니다.
+  function applyAuth(auth){
+    var was = state.unlocked;
+    state.auth = auth || null;
+    var token = state.token || getSessionToken();
+    state.unlocked = !!(state.auth && token && token === state.auth.hash);
+    if(!state.unlocked && token){ state.token = ""; setSessionToken(""); }
+    updateLockUI();
+    if(was && !state.unlocked){
+      alert("비밀번호가 변경되어 수정 상태가 잠겼습니다. 새 비밀번호로 다시 잠금을 해제해 주세요.");
+    }
+  }
+
+  function updateLockUI(){
+    var u = state.unlocked;
+    document.body.classList.toggle("is-locked", !u);
+    lockPill.textContent = u ? "수정 가능" : "보기 전용";
+    lockPill.className = "lock-pill" + (u ? " open" : "");
+    lockBtn.textContent = u ? "🔓 잠그기" : (state.auth ? "🔒 잠금 해제" : "🔑 비밀번호 설정");
+    changePwBtn.hidden = !u;
+    if(!u) settingsOverlay.hidden = true;
+    document.getElementById("paidNote").hidden = !u;
+    state.settleDirty = false;
+    renderSettleTable();
+    applyDayModalMode();
+  }
+
+  function lockNow(){
+    state.token = ""; setSessionToken("");
+    state.unlocked = false;
+    updateLockUI();
+  }
+
+  // 잠겨 있으면 비밀번호 창을 띄우고, 통과하면 after()를 실행합니다.
+  function requireUnlock(after){
+    if(state.unlocked){ if(after) after(); return; }
+    openAuth(state.auth ? "unlock" : "setup", after);
+  }
+
+  function openAuth(mode, after){
+    state.authMode = mode; state.authAfter = after || null;
+    var cfg = {
+      unlock: {title:"수정 잠금 해제", desc:"수정하려면 비밀번호를 입력해 주세요. 보기만 할 때는 필요하지 않습니다.", cur:true,  neu:false, ok:"잠금 해제"},
+      setup:  {title:"비밀번호 설정", desc:"아직 설정된 비밀번호가 없습니다. 수정할 때 사용할 비밀번호를 정해 주세요.", cur:false, neu:true,  ok:"설정"},
+      change: {title:"비밀번호 변경", desc:"현재 비밀번호를 확인한 뒤 새 비밀번호로 바꿉니다. 변경하면 다른 기기에서 열어 둔 수정 상태도 자동으로 잠깁니다.", cur:true, neu:true, ok:"변경"}
+    }[mode];
+    authTitle.textContent = cfg.title;
+    authDesc.textContent = cfg.desc;
+    authCurField.hidden = !cfg.cur;
+    authNewField.hidden = !cfg.neu;
+    authNew2Field.hidden = !cfg.neu;
+    authOkBtn.textContent = cfg.ok;
+    authCur.value = ""; authNew.value = ""; authNew2.value = "";
+    authError.textContent = "";
+    authOverlay.hidden = false;
+    (cfg.cur ? authCur : authNew).focus();
+  }
+  function closeAuth(){
+    authOverlay.hidden = true;
+    state.authMode = null; state.authAfter = null;
+    authCur.value = ""; authNew.value = ""; authNew2.value = "";
+  }
+
+  async function submitAuth(){
+    var mode = state.authMode; if(!mode) return;
+    authError.textContent = "";
+    if(!cryptoOk()){ authError.textContent = "이 환경에서는 비밀번호 기능을 쓸 수 없습니다(보안 연결 필요)."; return; }
+    authOkBtn.disabled = true;
+    try{
+      if(mode==="unlock" || mode==="change"){
+        if(!state.auth){ authError.textContent = "설정된 비밀번호가 없습니다."; return; }
+        var h = await deriveHash(authCur.value, state.auth.salt, state.auth.iter || PBKDF2_ITER);
+        if(h !== state.auth.hash){ authError.textContent = "비밀번호가 맞지 않습니다."; authCur.select(); return; }
+      }
+      if(mode==="unlock"){
+        state.token = state.auth.hash; setSessionToken(state.token);
+        state.unlocked = true;
+        var after = state.authAfter;
+        closeAuth(); updateLockUI();
+        if(after) after();
+        return;
+      }
+      // setup / change
+      var pw = authNew.value;
+      if(pw.length < PW_MIN_LEN){ authError.textContent = "새 비밀번호는 "+PW_MIN_LEN+"자 이상으로 정해 주세요."; return; }
+      if(pw !== authNew2.value){ authError.textContent = "새 비밀번호 확인이 일치하지 않습니다."; return; }
+      if(mode==="change" && pw === authCur.value){ authError.textContent = "현재 비밀번호와 다른 비밀번호를 입력해 주세요."; return; }
+      var next = await makeAuth(pw);
+      var prevToken = state.token;
+      state.token = next.hash; setSessionToken(next.hash);   // 저장 직후 도착하는 변경 알림에서 잠기지 않도록 먼저 갱신
+      try{ await backend.saveAuth(next); }
+      catch(err){ state.token = prevToken; setSessionToken(prevToken); writeFailed(err); return; }
+      state.auth = next; state.unlocked = true;
+      var after2 = state.authAfter;
+      closeAuth(); updateLockUI();
+      if(mode==="change") alert("비밀번호를 변경했습니다.");
+      if(after2) after2();
+    } finally {
+      authOkBtn.disabled = false;
+    }
+  }
+
+  // ----- 실제 결제액 직접 입력 -----
+  var settleTableEl = document.getElementById("settleTable");
+  settleTableEl.addEventListener("change", async function(e){
+    var inp = e.target;
+    if(!inp.classList || !inp.classList.contains("paid-input")) return;
+    if(!state.unlocked){ requireUnlock(null); return; }
+    var p = inp.dataset.p;
+    var raw = inp.value.trim();
+    var next = Object.assign({}, state.paidOverride);
+    if(raw===""){ delete next[p]; }
+    else {
+      var n = Number(raw);
+      if(!isFinite(n) || n<0){ alert("0 이상의 숫자로 입력해 주세요."); inp.value = state.paidOverride[p]!==undefined ? state.paidOverride[p] : ""; return; }
+      next[p] = Math.round(n);
+    }
+    var prev = state.paidOverride;
+    state.paidOverride = next; state.settleDirty = true;
+    try{ await backend.saveSettle(state.year, state.month, next); }
+    catch(err){ state.paidOverride = prev; state.settleDirty = true; writeFailed(err); }
+  });
+  settleTableEl.addEventListener("keydown", function(e){
+    if(e.target.classList && e.target.classList.contains("paid-input") && e.key==="Enter" && !e.isComposing){
+      e.preventDefault(); e.target.blur();
+    }
+  });
+  settleTableEl.addEventListener("focusout", function(){
+    setTimeout(function(){
+      if(state.settleDirty && !settleInputFocused()){ state.settleDirty = false; renderSettleTable(); }
+    }, 0);
+  });
+
+  lockBtn.addEventListener("click", function(){
+    if(state.unlocked) lockNow(); else requireUnlock(null);
+  });
+  changePwBtn.addEventListener("click", function(){ if(state.unlocked) openAuth("change", null); });
+  document.getElementById("unlockDayBtn").addEventListener("click", function(){ requireUnlock(null); });
+  authOkBtn.addEventListener("click", submitAuth);
+  authCancelBtn.addEventListener("click", closeAuth);
+  authOverlay.addEventListener("click", function(e){ if(e.target===authOverlay) closeAuth(); });
+  [authCur, authNew, authNew2].forEach(function(inp){
+    inp.addEventListener("keydown", function(e){
+      if(e.key==="Enter" && !e.isComposing){ e.preventDefault(); submitAuth(); }
+      else if(e.key==="Escape"){ closeAuth(); }
+    });
+  });
+
+  // ---------- Boot ----------
+  initBackend();
+})();
+</script>
+
+</body></html>
